@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.Events;
 
 public enum EXPRESSION
 {
@@ -16,6 +17,7 @@ public class Dialogue
     public string dialogueCharacter;
     public bool headDown;
     public EXPRESSION expression;
+    public UnityEvent onDialogue;
 }
 public class DialogueManager : MonoBehaviour
 {
@@ -58,6 +60,7 @@ public class DialogueManager : MonoBehaviour
         characterName.text = d.characterNovel.nameCharacter;
         dialogue.text = d.dialogueCharacter;
         portrait.sprite = d.characterNovel.GetSpriteExpression(d.expression, d.headDown);
+        d.onDialogue?.Invoke();
     }
 
     public void NextDialogue()
